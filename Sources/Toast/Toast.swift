@@ -54,6 +54,7 @@ public class Toast {
         actionTitle: String? = nil,
         actionButtonTitleColor: UIColor? = nil,
         actionButtonBackgroundColor: UIColor? = nil,
+        actionButtonRadius: CGFloat? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = TextToastView(title, subtitle: subtitle,
@@ -64,6 +65,7 @@ public class Toast {
                                   actionTitle: actionTitle,
                                   actionButtonTitleColor: actionButtonTitleColor,
                                   actionButtonBackgroundColor: actionButtonBackgroundColor,
+                                  actionButtonRadius: actionButtonRadius,
                                   action: action, viewConfig: viewConfig)
         let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth,
                                   cornerRadius: cornerRadius,
@@ -94,6 +96,7 @@ public class Toast {
         actionTitle: String? = nil,
         actionButtonTitleColor: UIColor? = nil,
         actionButtonBackgroundColor: UIColor? = nil,
+        actionButtonRadius: CGFloat? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = TextToastView(title, subtitle: subtitle,
@@ -104,6 +107,7 @@ public class Toast {
                                   actionTitle: actionTitle,
                                   actionButtonTitleColor: actionButtonTitleColor,
                                   actionButtonBackgroundColor: actionButtonBackgroundColor,
+                                  actionButtonRadius: actionButtonRadius,
                                   action: action, viewConfig: viewConfig)
         let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth,
                                   cornerRadius: cornerRadius,
@@ -138,6 +142,7 @@ public class Toast {
         actionTitle: String? = nil,
         actionButtonTitleColor: UIColor? = nil,
         actionButtonBackgroundColor: UIColor? = nil,
+        actionButtonRadius: CGFloat? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = IconAppleToastView(image: image,
@@ -151,6 +156,7 @@ public class Toast {
                                        actionTitle: actionTitle,
                                        actionButtonTitleColor: actionButtonTitleColor,
                                        actionButtonBackgroundColor: actionButtonBackgroundColor,
+                                       actionButtonRadius: actionButtonRadius,
                                        action: action,
                                        viewConfig: viewConfig)
         let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth, cornerRadius: cornerRadius,
@@ -185,6 +191,7 @@ public class Toast {
         actionTitle: String? = nil,
         actionButtonTitleColor: UIColor? = nil,
         actionButtonBackgroundColor: UIColor? = nil,
+        actionButtonRadius: CGFloat? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = IconAppleToastView(image: image,
@@ -198,6 +205,7 @@ public class Toast {
                                        actionTitle: actionTitle,
                                        actionButtonTitleColor: actionButtonTitleColor,
                                        actionButtonBackgroundColor: actionButtonBackgroundColor,
+                                       actionButtonRadius: actionButtonRadius,
                                        action: action,
                                        viewConfig: viewConfig)
         let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth, cornerRadius: cornerRadius,

@@ -118,6 +118,10 @@ public class IconAppleToastView : UIStackView {
         if let actionButtonBackgroundColor = actionButtonBackgroundColor {
             actionButton.backgroundColor = actionButtonBackgroundColor
         }
+        
+        if let actionButtonRadius = actionButtonRadius {
+            actionButton.layer.cornerRadius = actionButtonRadius
+        }
     }
     
     public init(image: UIImage,
@@ -182,6 +186,10 @@ public class IconAppleToastView : UIStackView {
         
         if let actionButtonBackgroundColor = actionButtonBackgroundColor {
             actionButton.layer.backgroundColor = actionButtonBackgroundColor.cgColor
+        }
+        
+        if let actionButtonRadius = actionButtonRadius {
+            actionButton.layer.cornerRadius = actionButtonRadius
         }
     }
     

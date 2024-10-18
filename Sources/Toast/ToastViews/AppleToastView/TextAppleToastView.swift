@@ -103,6 +103,10 @@ public class TextToastView : UIStackView {
         if let actionButtonBackgroundColor = actionButtonBackgroundColor {
             actionButton.layer.backgroundColor = actionButtonBackgroundColor.cgColor
         }
+        
+        if let actionButtonRadius = actionButtonRadius {
+            actionButton.layer.cornerRadius = actionButtonRadius
+        }
     }
     
     public init(_ title: String,
@@ -168,6 +172,10 @@ public class TextToastView : UIStackView {
         
         if let actionButtonBackgroundColor = actionButtonBackgroundColor {
             actionButton.backgroundColor = actionButtonBackgroundColor
+        }
+        
+        if let actionButtonRadius = actionButtonRadius {
+            actionButton.layer.cornerRadius = actionButtonRadius
         }
     }
     
