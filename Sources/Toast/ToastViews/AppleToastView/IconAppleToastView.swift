@@ -61,7 +61,14 @@ public class IconAppleToastView : UIStackView {
         imageTint: UIColor? = defaultImageTint,
         title: NSAttributedString,
         subtitle: NSAttributedString? = nil,
+        titleColorLight: UIColor? = nil,
+        titleColorDark: UIColor? = nil,
+        subTitleColorLight: UIColor? = nil,
+        subTitleColorDark: UIColor? = nil,
         actionTitle: String? = nil,
+        actionButtonTitleColor: UIColor? = nil,
+        actionButtonBackgroundColor: UIColor? = nil,
+        actionButtonRadius: CGFloat? = nil,
         action: (() -> Void)? = nil,
         viewConfig: ToastViewConfiguration
     ) {
@@ -81,6 +88,16 @@ public class IconAppleToastView : UIStackView {
             self.vStack.addArrangedSubview(self.subtitleLabel)
         }
         
+        if let titleColorLight = titleColorLight, let titleColorDark = titleColorDark {
+            self.titleLabel.textColor = traitCollection.userInterfaceStyle == .light ? titleColorLight :
+            titleColorDark
+        }
+        
+        if let subTitleColorLight = subTitleColorLight, let subTitleColorDark = subTitleColorDark {
+            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? subTitleColorLight :
+            subTitleColorDark
+        }
+        
         self.imageView.image = image
         self.imageView.tintColor = imageTint
         
@@ -93,13 +110,28 @@ public class IconAppleToastView : UIStackView {
             addArrangedSubview(self.actionButton)
             setCustomSpacing(15, after: self.actionButton)
         }
+        
+        if let  actionButtonTitleColor = actionButtonTitleColor {
+            actionButton.setTitleColor(actionButtonTitleColor, for: .normal)
+        }
+        
+        if let actionButtonBackgroundColor = actionButtonBackgroundColor {
+            actionButton.backgroundColor = actionButtonBackgroundColor
+        }
     }
     
     public init(image: UIImage,
                 imageTint: UIColor? = defaultImageTint,
                 title: String,
                 subtitle: String? = nil,
+                titleColorLight: UIColor? = nil,
+                titleColorDark: UIColor? = nil,
+                subTitleColorLight: UIColor? = nil,
+                subTitleColorDark: UIColor? = nil,
                 actionTitle: String? = nil,
+                actionButtonTitleColor: UIColor? = nil,
+                actionButtonBackgroundColor: UIColor? = nil,
+                actionButtonRadius: CGFloat? = nil,
                 action: (() -> Void)? = nil,
                 viewConfig: ToastViewConfiguration) {
         
@@ -121,6 +153,16 @@ public class IconAppleToastView : UIStackView {
             self.vStack.addArrangedSubview(self.subtitleLabel)
         }
         
+        if let titleColorLight = titleColorLight, let titleColorDark = titleColorDark {
+            self.titleLabel.textColor = traitCollection.userInterfaceStyle == .light ? titleColorLight :
+            titleColorDark
+        }
+        
+        if let subTitleColorLight = subTitleColorLight, let subTitleColorDark = subTitleColorDark {
+            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? subTitleColorLight :
+            subTitleColorDark
+        }
+        
         self.imageView.image = image
         self.imageView.tintColor = imageTint
         
@@ -132,6 +174,14 @@ public class IconAppleToastView : UIStackView {
             self.actionButton.setTitle(actionTitle, for: .normal)
             addArrangedSubview(self.actionButton)
             setCustomSpacing(15, after: self.actionButton)
+        }
+        
+        if let actionButtonTitleColor = actionButtonTitleColor {
+            actionButton.setTitleColor(actionButtonTitleColor, for: .normal)
+        }
+        
+        if let actionButtonBackgroundColor = actionButtonBackgroundColor {
+            actionButton.layer.backgroundColor = actionButtonBackgroundColor.cgColor
         }
     }
     

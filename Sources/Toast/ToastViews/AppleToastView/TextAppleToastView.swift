@@ -35,13 +35,22 @@ public class TextToastView : UIStackView {
         button.addTarget(self, action: #selector(actionButtonPressed(_ :)), for: .touchUpInside)
         button.setTitleColor(UIColor(named: "SystemBlue"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+        button.layer.cornerRadius = 12
+        button.layer.backgroundColor = UIColor.white.cgColor
         return button
     }()
     
     public init(_ title: NSAttributedString,
                 subtitle: NSAttributedString? = nil,
+                titleColorLight: UIColor? = nil,
+                titleColorDark: UIColor? = nil,
+                subTitleColorLight: UIColor? = nil,
+                subTitleColorDark: UIColor? = nil,
                 actionTitle: String? = nil,
-                actionButtonColor: UIColor? = nil,
+                actionButtonTitleColor: UIColor? = nil,
+                actionButtonBackgroundColor: UIColor? = nil,
+                actionButtonRadius: CGFloat? = nil,
                 action: (() -> Void)? = nil,
                 viewConfig: ToastViewConfiguration) {
         
@@ -59,6 +68,25 @@ public class TextToastView : UIStackView {
             self.vStack.addArrangedSubview(self.subtitleLabel)
         }
         
+        if #available(iOS 12.0, *) {
+            self.titleLabel.textColor  = traitCollection.userInterfaceStyle == .light ? viewConfig.titleDarkColor: 
+            viewConfig.titleLightColor
+            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? viewConfig.subTitleDarkColor: 
+            viewConfig.subTitleLightColor
+        } else {
+            
+        }
+        
+        if let titleColorLight = titleColorLight, let titleColorDark = titleColorDark {
+            self.titleLabel.textColor = traitCollection.userInterfaceStyle == .light ? titleColorLight :
+            titleColorDark
+        }
+        
+        if let subTitleColorLight = subTitleColorLight, let subTitleColorDark = subTitleColorDark {
+            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? subTitleColorLight :
+            subTitleColorDark
+        }
+        
         addArrangedSubview(self.vStack)
         
         if let actionTitle = actionTitle {
@@ -68,15 +96,25 @@ public class TextToastView : UIStackView {
             setCustomSpacing(15, after: self.actionButton)
         }
         
-        if let actionButtonColor = actionButtonColor {
-            actionButton.setTitleColor(actionButtonColor, for: .normal)
+        if let actionButtonTitleColor = actionButtonTitleColor {
+            actionButton.setTitleColor(actionButtonTitleColor, for: .normal)
+        }
+        
+        if let actionButtonBackgroundColor = actionButtonBackgroundColor {
+            actionButton.layer.backgroundColor = actionButtonBackgroundColor.cgColor
         }
     }
     
     public init(_ title: String,
                 subtitle: String? = nil,
+                titleColorLight: UIColor? = nil,
+                titleColorDark: UIColor? = nil,
+                subTitleColorLight: UIColor? = nil,
+                subTitleColorDark: UIColor? = nil,
                 actionTitle: String? = nil,
-                actionButtonColor: UIColor? = nil,
+                actionButtonTitleColor: UIColor? = nil,
+                actionButtonBackgroundColor: UIColor? = nil,
+                actionButtonRadius: CGFloat? = nil,
                 action: (() -> Void)? = nil,
                 viewConfig: ToastViewConfiguration) {
         self.action = action
@@ -96,6 +134,25 @@ public class TextToastView : UIStackView {
             self.vStack.addArrangedSubview(self.subtitleLabel)
         }
         
+        if #available(iOS 12.0, *) {
+            self.titleLabel.textColor  = traitCollection.userInterfaceStyle == .light ? viewConfig.titleLightColor :
+            viewConfig.titleDarkColor
+            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? viewConfig.subTitleDarkColor:
+            viewConfig.subTitleLightColor
+        } else {
+            
+        }
+        
+        if let titleColorLight = titleColorLight, let titleColorDark = titleColorDark {
+            self.titleLabel.textColor = traitCollection.userInterfaceStyle == .light ? titleColorLight :
+            titleColorDark
+        }
+        
+        if let subTitleColorLight = subTitleColorLight, let subTitleColorDark = subTitleColorDark {
+            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? subTitleColorLight :
+            subTitleColorDark
+        }
+        
         addArrangedSubview(self.vStack)
         
         if let actionTitle = actionTitle {
@@ -105,8 +162,12 @@ public class TextToastView : UIStackView {
             setCustomSpacing(15, after: self.actionButton)
         }
         
-        if let actionButtonColor = actionButtonColor {
-            actionButton.setTitleColor(actionButtonColor, for: .normal)
+        if let actionButtonTitleColor = actionButtonTitleColor {
+            actionButton.setTitleColor(actionButtonTitleColor, for: .normal)
+        }
+        
+        if let actionButtonBackgroundColor = actionButtonBackgroundColor {
+            actionButton.backgroundColor = actionButtonBackgroundColor
         }
     }
     

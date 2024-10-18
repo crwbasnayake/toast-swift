@@ -40,15 +40,34 @@ public class Toast {
     public static func text(
         _ title: NSAttributedString,
         subtitle: NSAttributedString? = nil,
+        titleColorLight: UIColor? = nil,
+        titleColorDark: UIColor? = nil,
+        subTitleColorLight: UIColor? = nil,
+        subTitleColorDark: UIColor? = nil,
+        minHeight: CGFloat? = nil,
+        minWidth: CGFloat? = nil,
+        cornerRadius: CGFloat? = nil,
+        darkBackgroundColor: UIColor? = nil,
+        lightBackgroundColor: UIColor? = nil,
         viewConfig: ToastViewConfiguration = ToastViewConfiguration(),
         config: ToastConfiguration = ToastConfiguration(),
         actionTitle: String? = nil,
-        actionButtonColor: UIColor? = nil,
+        actionButtonTitleColor: UIColor? = nil,
+        actionButtonBackgroundColor: UIColor? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = TextToastView(title, subtitle: subtitle,
-                                  actionTitle: actionTitle, actionButtonColor: actionButtonColor, action: action, viewConfig: viewConfig)
-        let view = AppleToastView(child: child, config: viewConfig)
+                                 titleColorLight: titleColorLight,
+                                  titleColorDark: titleColorDark,
+                                  subTitleColorLight: subTitleColorLight,
+                                  subTitleColorDark: subTitleColorDark,
+                                  actionTitle: actionTitle,
+                                  actionButtonTitleColor: actionButtonTitleColor,
+                                  actionButtonBackgroundColor: actionButtonBackgroundColor,
+                                  action: action, viewConfig: viewConfig)
+        let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth,
+                                  cornerRadius: cornerRadius,
+                                  darkBackgroundColor:darkBackgroundColor, lightBackgroundColor: lightBackgroundColor ,config: viewConfig)
         return self.init(view: view, config: config)
     }
     
@@ -61,15 +80,34 @@ public class Toast {
     public static func text(
         _ title: String,
         subtitle: String? = nil,
+        titleColorLight: UIColor? = nil,
+        titleColorDark: UIColor? = nil,
+        subTitleColorLight: UIColor? = nil,
+        subTitleColorDark: UIColor? = nil,
+        minHeight: CGFloat? = nil,
+        minWidth: CGFloat? = nil,
+        cornerRadius: CGFloat? = nil,
+        darkBackgroundColor: UIColor? = nil,
+        lightBackgroundColor: UIColor? = nil,
         viewConfig: ToastViewConfiguration = ToastViewConfiguration(),
         config: ToastConfiguration = ToastConfiguration(),
         actionTitle: String? = nil,
-        actionButtonColor: UIColor? = nil,
+        actionButtonTitleColor: UIColor? = nil,
+        actionButtonBackgroundColor: UIColor? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = TextToastView(title, subtitle: subtitle,
-                                  actionTitle: actionTitle, actionButtonColor: actionButtonColor, action: action, viewConfig: viewConfig)
-        let view = AppleToastView(child: child, config: viewConfig)
+                                  titleColorLight: titleColorLight,
+                                  titleColorDark: titleColorDark,
+                                  subTitleColorLight: subTitleColorLight,
+                                  subTitleColorDark: subTitleColorDark,
+                                  actionTitle: actionTitle,
+                                  actionButtonTitleColor: actionButtonTitleColor,
+                                  actionButtonBackgroundColor: actionButtonBackgroundColor,
+                                  action: action, viewConfig: viewConfig)
+        let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth,
+                                  cornerRadius: cornerRadius,
+                                  darkBackgroundColor:darkBackgroundColor, lightBackgroundColor: lightBackgroundColor ,config: viewConfig)
         return self.init(view: view, config: config)
     }
     
@@ -86,22 +124,37 @@ public class Toast {
         imageTint: UIColor? = defaultImageTint,
         title: NSAttributedString,
         subtitle: NSAttributedString? = nil,
+        titleColorLight: UIColor? = nil,
+        titleColorDark: UIColor? = nil,
+        subTitleColorLight: UIColor? = nil,
+        subTitleColorDark: UIColor? = nil,
+        minHeight: CGFloat? = nil,
+        minWidth: CGFloat? = nil,
+        cornerRadius: CGFloat? = nil,
+        darkBackgroundColor: UIColor? = nil,
+        lightBackgroundColor: UIColor? = nil,
         viewConfig: ToastViewConfiguration = ToastViewConfiguration(),
         config: ToastConfiguration = ToastConfiguration(),
         actionTitle: String? = nil,
+        actionButtonTitleColor: UIColor? = nil,
+        actionButtonBackgroundColor: UIColor? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = IconAppleToastView(image: image,
                                        imageTint: imageTint,
                                        title: title,
                                        subtitle: subtitle,
+                                       titleColorLight: titleColorLight,
+                                       titleColorDark: titleColorDark,
+                                       subTitleColorLight: subTitleColorLight,
+                                       subTitleColorDark: subTitleColorDark,
                                        actionTitle: actionTitle,
+                                       actionButtonTitleColor: actionButtonTitleColor,
+                                       actionButtonBackgroundColor: actionButtonBackgroundColor,
                                        action: action,
                                        viewConfig: viewConfig)
-        let view = AppleToastView(
-            child: child,
-            config: viewConfig
-        )
+        let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth, cornerRadius: cornerRadius,
+                                  darkBackgroundColor: darkBackgroundColor, lightBackgroundColor: lightBackgroundColor, config: viewConfig)
         return self.init(view: view, config: config)
     }
     
@@ -118,22 +171,37 @@ public class Toast {
         imageTint: UIColor? = defaultImageTint,
         title: String,
         subtitle: String? = nil,
+        titleColorLight: UIColor? = nil,
+        titleColorDark: UIColor? = nil,
+        subTitleColorLight: UIColor? = nil,
+        subTitleColorDark: UIColor? = nil,
+        minHeight: CGFloat? = nil,
+        minWidth: CGFloat? = nil,
+        cornerRadius: CGFloat? = nil,
+        darkBackgroundColor: UIColor? = nil,
+        lightBackgroundColor: UIColor? = nil,
         viewConfig: ToastViewConfiguration = ToastViewConfiguration(),
         config: ToastConfiguration = ToastConfiguration(),
         actionTitle: String? = nil,
+        actionButtonTitleColor: UIColor? = nil,
+        actionButtonBackgroundColor: UIColor? = nil,
         action: (() -> Void)? = nil
     ) -> Toast {
         let child = IconAppleToastView(image: image,
                                        imageTint: imageTint,
                                        title: title,
                                        subtitle: subtitle,
+                                       titleColorLight: titleColorLight,
+                                       titleColorDark: titleColorDark,
+                                       subTitleColorLight: subTitleColorLight,
+                                       subTitleColorDark: subTitleColorDark,
                                        actionTitle: actionTitle,
+                                       actionButtonTitleColor: actionButtonTitleColor,
+                                       actionButtonBackgroundColor: actionButtonBackgroundColor,
                                        action: action,
                                        viewConfig: viewConfig)
-        let view = AppleToastView(
-            child: child,
-            config: viewConfig
-        )
+        let view = AppleToastView(child: child, minHeight: minHeight, minWidth: minWidth, cornerRadius: cornerRadius,
+                                  darkBackgroundColor: darkBackgroundColor, lightBackgroundColor: lightBackgroundColor, config: viewConfig)
         return self.init(view: view, config: config)
     }
     
