@@ -9,30 +9,43 @@ import Foundation
 import UIKit
 
 public struct ToastViewConfiguration {
-    public let minHeight: CGFloat
-    public let minWidth: CGFloat
+    public var minHeight: CGFloat
+    public var minWidth: CGFloat
     
-    public let darkBackgroundColor: UIColor
-    public let lightBackgroundColor: UIColor
+    public var darkBackgroundColor: UIColor
+    public var lightBackgroundColor: UIColor
     
     public let titleNumberOfLines: Int
     public let subtitleNumberOfLines: Int
     
-    public let cornerRadius: CGFloat?
+    public let titleLightColor: UIColor
+    public let titleDarkColor: UIColor
+    public let subTitleLightColor: UIColor
+    public let subTitleDarkColor: UIColor
+    
+    public var cornerRadius: CGFloat?
     
     public init(
         minHeight: CGFloat = 58,
         minWidth: CGFloat = 150,
         darkBackgroundColor: UIColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.00),
         lightBackgroundColor: UIColor = UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00),
-        titleNumberOfLines: Int = 1,
-        subtitleNumberOfLines: Int = 1,
+        titleLightColor: UIColor = UIColor(red: 0.13, green: 0.13, blue: 0.13, alpha: 1.00),
+        titleDarkColor: UIColor = UIColor(red: 0.99, green: 0.99, blue: 0.99, alpha: 1.00),
+        subTitleLightColor: UIColor = .systemGray,
+        subTitleDarkColor: UIColor = .systemGray,
+        titleNumberOfLines: Int = 0,
+        subtitleNumberOfLines: Int = 0,
         cornerRadius: CGFloat? = nil
     ) {
         self.minHeight = minHeight
         self.minWidth = minWidth
         self.darkBackgroundColor = darkBackgroundColor
         self.lightBackgroundColor = lightBackgroundColor
+        self.titleLightColor = titleLightColor
+        self.titleDarkColor = titleDarkColor
+        self.subTitleLightColor = subTitleLightColor
+        self.subTitleDarkColor = subTitleDarkColor
         self.titleNumberOfLines = titleNumberOfLines
         self.subtitleNumberOfLines = subtitleNumberOfLines
         self.cornerRadius = cornerRadius

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 public class AppleToastView : UIView, ToastView {
-    private let config: ToastViewConfiguration
+    private var config: ToastViewConfiguration
     
     private let child: UIView
     
@@ -17,13 +17,44 @@ public class AppleToastView : UIView, ToastView {
     
     public init(
         child: UIView,
+        minHeight: CGFloat? = nil,
+        minWidth: CGFloat? = nil,
+        cornerRadius: CGFloat? = nil,
+        darkBackgroundColor: UIColor? = nil,
+        lightBackgroundColor: UIColor? = nil,
         config: ToastViewConfiguration = ToastViewConfiguration()
     ) {
         self.config = config
         self.child = child
+        
+        if let minHeight = minHeight {
+            self.config.minHeight = minHeight
+        }
+        
+        if let minWidth = minWidth {
+            self.config.minWidth = minWidth
+        }
+        
+        if let darkBackgroundColor = darkBackgroundColor {
+            self.config.darkBackgroundColor = darkBackgroundColor
+        }
+        
+        if let lightBackgroundColor = lightBackgroundColor {
+            self.config.lightBackgroundColor = lightBackgroundColor
+        }
+        
+        if let cornerRadius = cornerRadius {
+            self.config.cornerRadius = cornerRadius
+        }
+        
         super.init(frame: .zero)
         
         addSubview(child)
+    }
+    
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        style()
     }
     
     public override func removeFromSuperview() {
@@ -39,8 +70,8 @@ public class AppleToastView : UIView, ToastView {
         NSLayoutConstraint.activate([
             heightAnchor.constraint(greaterThanOrEqualToConstant: config.minHeight),
             widthAnchor.constraint(greaterThanOrEqualToConstant: config.minWidth),
-            leadingAnchor.constraint(greaterThanOrEqualTo: superview.leadingAnchor, constant: 10),
-            trailingAnchor.constraint(lessThanOrEqualTo: superview.trailingAnchor, constant: -10),
+            leadingAnchor.constraint(greaterThanOrEqualTo: superview.leadingAnchor, constant: 20),
+            trailingAnchor.constraint(lessThanOrEqualTo: superview.trailingAnchor, constant: -20),
             centerXAnchor.constraint(equalTo: superview.centerXAnchor)
         ])
         
@@ -54,9 +85,6 @@ public class AppleToastView : UIView, ToastView {
         }
         
         addSubviewConstraints()
-        DispatchQueue.main.async {
-            self.style()
-        }
     }
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -71,7 +99,7 @@ public class AppleToastView : UIView, ToastView {
         layer.zPosition = 999
         layer.cornerRadius = config.cornerRadius ?? frame.height / 2
         if #available(iOS 12.0, *) {
-            backgroundColor = traitCollection.userInterfaceStyle == .light ? config.lightBackgroundColor : config.darkBackgroundColor
+            backgroundColor = traitCollection.userInterfaceStyle == .light ? config.lightBackgroundColor: config.darkBackgroundColor
         } else {
             backgroundColor = config.lightBackgroundColor
         }
@@ -85,7 +113,7 @@ public class AppleToastView : UIView, ToastView {
             child.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             child.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             child.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            child.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25)
+            child.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
         ])
     }
     
