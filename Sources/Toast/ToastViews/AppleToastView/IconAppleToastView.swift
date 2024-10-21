@@ -17,7 +17,7 @@ public class IconAppleToastView : UIStackView {
         stackView.axis = .vertical
         stackView.spacing = 2
         stackView.alignment = .center
-        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -105,10 +105,16 @@ public class IconAppleToastView : UIStackView {
         addArrangedSubview(self.vStack)
         
         if let actionTitle = actionTitle {
-            setCustomSpacing(25, after: self.vStack)
+            setCustomSpacing(12, after: self.vStack)
             self.actionButton.setTitle(actionTitle, for: .normal)
             addArrangedSubview(self.actionButton)
-            setCustomSpacing(15, after: self.actionButton)
+            setCustomSpacing(10, after: self.actionButton)
+        } else {
+            // Add the same trailing and leading padding when action button is not available
+            let spacerView = UIView()
+            spacerView.translatesAutoresizingMaskIntoConstraints = false
+            addArrangedSubview(spacerView)
+            spacerView.widthAnchor.constraint(equalToConstant: 6).isActive = true
         }
         
         if let  actionButtonTitleColor = actionButtonTitleColor {
@@ -174,10 +180,16 @@ public class IconAppleToastView : UIStackView {
         addArrangedSubview(self.vStack)
         
         if let actionTitle = actionTitle {
-            setCustomSpacing(25, after: self.vStack)
+            setCustomSpacing(12, after: self.vStack)
             self.actionButton.setTitle(actionTitle, for: .normal)
             addArrangedSubview(self.actionButton)
-            setCustomSpacing(15, after: self.actionButton)
+            setCustomSpacing(10, after: self.actionButton)
+        } else {
+            // Add the same trailing and leading padding when action button is not available
+            let spacerView = UIView()
+            spacerView.translatesAutoresizingMaskIntoConstraints = false
+            addArrangedSubview(spacerView)
+            spacerView.widthAnchor.constraint(equalToConstant: 6).isActive = true
         }
         
         if let actionButtonTitleColor = actionButtonTitleColor {

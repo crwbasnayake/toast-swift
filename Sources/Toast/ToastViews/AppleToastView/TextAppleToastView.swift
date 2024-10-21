@@ -17,8 +17,8 @@ public class TextToastView : UIStackView {
         stackView.axis = .vertical
         stackView.spacing = 2
         stackView.alignment = .center
-        stackView.distribution = .fillEqually
-        
+        stackView.distribution = .fill
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
@@ -35,8 +35,8 @@ public class TextToastView : UIStackView {
         button.addTarget(self, action: #selector(actionButtonPressed(_ :)), for: .touchUpInside)
         button.setTitleColor(UIColor(named: "SystemBlue"), for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 14, weight: .bold)
-        button.contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
-        button.layer.cornerRadius = 12
+        button.contentEdgeInsets = UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)
+        button.layer.cornerRadius = 15
         button.layer.backgroundColor = UIColor.white.cgColor
         return button
     }()
@@ -64,14 +64,15 @@ public class TextToastView : UIStackView {
         
         if let subtitle = subtitle {
             self.subtitleLabel.attributedText = subtitle
+            self.subtitleLabel.textAlignment = .center
             self.subtitleLabel.numberOfLines = viewConfig.subtitleNumberOfLines
             self.vStack.addArrangedSubview(self.subtitleLabel)
         }
         
         if #available(iOS 12.0, *) {
-            self.titleLabel.textColor  = traitCollection.userInterfaceStyle == .light ? viewConfig.titleDarkColor: 
+            self.titleLabel.textColor  = traitCollection.userInterfaceStyle == .light ? viewConfig.titleDarkColor:
             viewConfig.titleLightColor
-            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? viewConfig.subTitleDarkColor: 
+            self.subtitleLabel.textColor = traitCollection.userInterfaceStyle == .light ? viewConfig.subTitleDarkColor:
             viewConfig.subTitleLightColor
         } else {
             
@@ -90,10 +91,16 @@ public class TextToastView : UIStackView {
         addArrangedSubview(self.vStack)
         
         if let actionTitle = actionTitle {
-            setCustomSpacing(25, after: self.vStack)
+            setCustomSpacing(12, after: self.vStack)
             self.actionButton.setTitle(actionTitle, for: .normal)
             addArrangedSubview(self.actionButton)
-            setCustomSpacing(15, after: self.actionButton)
+            setCustomSpacing(10, after: self.actionButton)
+        } else {
+            // Add the same trailing and leading padding when action button is not available
+            let spacerView = UIView()
+            spacerView.translatesAutoresizingMaskIntoConstraints = false
+            addArrangedSubview(spacerView)
+            spacerView.widthAnchor.constraint(equalToConstant: 6).isActive = true
         }
         
         if let actionButtonTitleColor = actionButtonTitleColor {
@@ -133,6 +140,7 @@ public class TextToastView : UIStackView {
         if let subtitle = subtitle {
             self.subtitleLabel.textColor = .systemGray
             self.subtitleLabel.text = subtitle
+            self.subtitleLabel.textAlignment = .center
             self.subtitleLabel.numberOfLines = viewConfig.subtitleNumberOfLines
             self.subtitleLabel.font = .systemFont(ofSize: 12, weight: .bold)
             self.vStack.addArrangedSubview(self.subtitleLabel)
@@ -160,10 +168,16 @@ public class TextToastView : UIStackView {
         addArrangedSubview(self.vStack)
         
         if let actionTitle = actionTitle {
-            setCustomSpacing(25, after: self.vStack)
+            setCustomSpacing(12, after: self.vStack)
             self.actionButton.setTitle(actionTitle, for: .normal)
             addArrangedSubview(self.actionButton)
-            setCustomSpacing(15, after: self.actionButton)
+            setCustomSpacing(0, after: self.actionButton)
+        } else {
+            // Add the same trailing and leading padding when action button is not available
+            let spacerView = UIView()
+            spacerView.translatesAutoresizingMaskIntoConstraints = false
+            addArrangedSubview(spacerView)
+            spacerView.widthAnchor.constraint(equalToConstant: 0).isActive = true
         }
         
         if let actionButtonTitleColor = actionButtonTitleColor {

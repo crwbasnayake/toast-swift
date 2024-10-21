@@ -52,6 +52,11 @@ public class AppleToastView : UIView, ToastView {
         addSubview(child)
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        style()
+    }
+    
     public override func removeFromSuperview() {
       super.removeFromSuperview()
       self.toast = nil
@@ -65,8 +70,8 @@ public class AppleToastView : UIView, ToastView {
         NSLayoutConstraint.activate([
             heightAnchor.constraint(greaterThanOrEqualToConstant: config.minHeight),
             widthAnchor.constraint(greaterThanOrEqualToConstant: config.minWidth),
-            leadingAnchor.constraint(greaterThanOrEqualTo: superview.leadingAnchor, constant: 10),
-            trailingAnchor.constraint(lessThanOrEqualTo: superview.trailingAnchor, constant: -10),
+            leadingAnchor.constraint(greaterThanOrEqualTo: superview.leadingAnchor, constant: 20),
+            trailingAnchor.constraint(lessThanOrEqualTo: superview.trailingAnchor, constant: -20),
             centerXAnchor.constraint(equalTo: superview.centerXAnchor)
         ])
         
@@ -80,9 +85,6 @@ public class AppleToastView : UIView, ToastView {
         }
         
         addSubviewConstraints()
-        DispatchQueue.main.async {
-            self.style()
-        }
     }
     
     public override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -111,7 +113,7 @@ public class AppleToastView : UIView, ToastView {
             child.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             child.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             child.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 25),
-            child.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -25)
+            child.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
         ])
     }
     
