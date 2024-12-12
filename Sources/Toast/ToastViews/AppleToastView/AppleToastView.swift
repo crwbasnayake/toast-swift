@@ -82,6 +82,10 @@ public class AppleToastView : UIView, ToastView {
             topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor, constant: 0).isActive = true
         case .center:
             centerYAnchor.constraint(equalTo: superview.layoutMarginsGuide.centerYAnchor, constant: 0).isActive = true
+        case .bottomWithGap(let value):
+            // Calculate offset: negative for positive values, or 0 if nil
+            let offset = CGFloat(value.map { $0 > 0 ? -$0 : $0 } ?? 0)
+           bottomAnchor.constraint(equalTo: superview.layoutMarginsGuide.bottomAnchor, constant: offset).isActive = true
         }
         
         addSubviewConstraints()
