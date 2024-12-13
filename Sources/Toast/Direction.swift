@@ -11,7 +11,9 @@ extension Toast {
  
     /// The direction where the toast will be displayed
     public enum Direction {
-        case top, bottom, center
+        case top
+        case bottom(gap: Int = 0)
+        case center
     }
     
     public enum DismissSwipeDirection: Equatable {
