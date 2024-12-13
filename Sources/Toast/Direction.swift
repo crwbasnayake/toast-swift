@@ -12,9 +12,8 @@ extension Toast {
     /// The direction where the toast will be displayed
     public enum Direction {
         case top
-        case bottom
+        case bottom(gap: Int?)
         case center
-        case bottomWithGap(value: CGFloat?)
     }
     
     public enum DismissSwipeDirection: Equatable {
@@ -36,8 +35,6 @@ extension Toast {
                     return delta >= 0
                 case .center:
                     return delta <= 0
-                case .bottomWithGap:
-                    return delta >= 0
                 }
             }
         }

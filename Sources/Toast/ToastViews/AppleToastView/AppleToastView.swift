@@ -76,16 +76,17 @@ public class AppleToastView : UIView, ToastView {
         ])
         
         switch toast.config.direction {
-        case .bottom:
-            bottomAnchor.constraint(equalTo: superview.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+        case .bottom(let gap):
+            if let gap = gap {
+                let offset = gap > 0 ? -gap : gap
+               bottomAnchor.constraint(equalTo: superview.layoutMarginsGuide.bottomAnchor, constant: CGFloat(offset)).isActive = true
+            } else {
+                bottomAnchor.constraint(equalTo: superview.layoutMarginsGuide.bottomAnchor, constant: 0).isActive = true
+            }
         case .top:
             topAnchor.constraint(equalTo: superview.layoutMarginsGuide.topAnchor, constant: 0).isActive = true
         case .center:
             centerYAnchor.constraint(equalTo: superview.layoutMarginsGuide.centerYAnchor, constant: 0).isActive = true
-        case .bottomWithGap(let value):
-            // Calculate offset: negative for positive values, or 0 if nil
-            let offset = CGFloat(value.map { $0 > 0 ? -$0 : $0 } ?? 0)
-           bottomAnchor.constraint(equalTo: superview.layoutMarginsGuide.bottomAnchor, constant: offset).isActive = true
         }
         
         addSubviewConstraints()
