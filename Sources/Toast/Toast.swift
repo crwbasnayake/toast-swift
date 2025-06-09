@@ -7,7 +7,7 @@
 
 import UIKit
 
-public class Toast {
+public class Toast: NSObject {
     private static var activeToasts = [Toast]()
     
     public let view: ToastView
@@ -233,6 +233,7 @@ public class Toast {
     public required init(view: ToastView, config: ToastConfiguration) {
         self.config = config
         self.view = view
+        super.init() 
         
         for dismissable in config.dismissables {
             switch dismissable {
@@ -394,8 +395,14 @@ public extension Toast {
         }
     }
     
+//    func enableTapToClose() {
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(toastOnTap))
+//        self.view.addGestureRecognizer(tap)
+//    }
+    
     func enableTapToClose() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(toastOnTap))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(toastOnTap(_:)))
+        tap.delegate = self
         self.view.addGestureRecognizer(tap)
     }
     
@@ -420,6 +427,14 @@ public extension Toast {
     }
 }
 
+extension Toast: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        // Prevent dismiss if the touched view is a UIButton
+        return !(touch.view is UIButton)
+    }
+}
+
+
 extension Toast {
     public enum Dismissable: Equatable {
         case tap,
@@ -434,9 +449,9 @@ extension Toast {
     }
 }
 
-extension Toast: Equatable {
-    public static func == (lhs: Toast, rhs: Toast) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-}
+//extension Toast {
+//    public static func == (lhs: Toast, rhs: Toast) -> Bool {
+//        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+//    }
+//}
 

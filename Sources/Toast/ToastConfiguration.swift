@@ -30,7 +30,7 @@ public struct ToastConfiguration {
     ///   - allowToastOverlap: Allows new toasts to appear over existing ones.
     public init(
         direction: Toast.Direction = .top,
-        dismissBy: [Toast.Dismissable] = [.time(time: 4.0), .swipe(direction: .natural)],
+        dismissBy: [Toast.Dismissable] = [.time(time: 4.0), .swipe(direction: .natural), .tap],
         animationTime: TimeInterval = 0.2,
         enteringAnimation: Toast.AnimationType = .default,
         exitingAnimation: Toast.AnimationType = .default,
